@@ -37,16 +37,16 @@ Go to Users -> Add user
  	
 ### Get token (Postman*)
 
-**HEADER**:       `Authorization: Bearer Token`
-
-**METODO**:       `POST`   
+**METOD**:       `POST`   
 **URL**:          `/auth/realms/gncorp/protocol/openid-connect/token`   
 **HEADER**:       `Content-Type:application/x-www-form-urlencoded`  
-**PARAMETROS**:   `username=gabriel&password=Password01&grant_type=password&client_id=zoo`   
+**PARAMETERS**:   `username=gabriel&password=Password01&grant_type=password&client_id=zoo`
+
+Get the new Token, copy and paste in each endpoint.   
 
 ### ENDPOINTS
 
-All endpoints with **HEADER**: `Authorization: Bearer Token`
+All endpoints: **HEADER**: `Authorization: Bearer Token` and put the Token.
 
 ### GET: 	`http://localhost:9070/api/v1/animals`
 ### POST: 	`http://localhost:9070/api/v1/animals`
