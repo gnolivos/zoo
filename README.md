@@ -14,12 +14,12 @@ Execute:
  > `docker ps -a` (Validate status up)
 
 ### Keycloak Configuration
- > `http://localhost:8084`
+ > `http://keycloak:8080/`
 
-Console Administration 
+**Console Administration** 
 
-**Username**: admin
-**Password**: admin
+> Username: admin
+> Password: admin
 
 Go to Master -> Add realm
  - **Name**: gncorp -> *Create*
@@ -55,27 +55,24 @@ Go to Users -> Add user
 	    "age": 3,
 	    "dateBorn": "2019-03-20",
 	    "weight": 3.4
-	}
-**PUT**: 	`http://localhost:8081/api/v1/animals`
- 	{
+	  }
+### PUT: 	`http://localhost:8081/api/v1/animals`
+ 	 {
 		"id": 1,
 		"name": "Tiger"
-	}
-**DELETE**: 	`http://localhost:8081/api/v1/animals/{id}`
-**PATCH**: 	`http://localhost:8081/api/v1/animals/{id}`
+	 }
+### DELETE: 	`http://localhost:8081/api/v1/animals/{id}`
+### PATCH: 	`http://localhost:8081/api/v1/animals/{id}`
 	{
-	   "id": 1,
-	   "myMap": {
-	         		"id": 1,
-	         		"name": "Monkey" 
-	     		}
+	   "name": "Monkey"
 	}
 
 ### OPENAPI
  > `http://localhost:8081/swagger-ui-custom.html`
 
  
-# Docker
-gradle clean build jib
+### Docker jib
+> `gradle clean build jib`
 
-agregar en el host la ip de keycloak
+### Add IP addresses to host file (C:\Windows\System32\drivers\etc\hosts)
+> `127.0.0.1 keycloak`
