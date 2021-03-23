@@ -1,4 +1,5 @@
-This project was designed in Java 8 with Springboot. It has a hexagonal architecture and uses MySql as its database.
+This project was designed in Java 8 with Springboot. 
+Gradle 6.3 and MySql are used as the database.
 
 ### Clone
  > `Create a folder, open a terminal and execute: git clone https://github.com/gnolivos/zoo.git`
