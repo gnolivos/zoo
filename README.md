@@ -1,19 +1,19 @@
-### This project was designed in Java 8 with Springboot. It has a hexagonal architecture and uses MySql as its database.
+This project was designed in Java 8 with Springboot. It has a hexagonal architecture and uses MySql as its database.
 
-## Clone
+### Clone
  > `git clone https://github.com/gnolivos/zoo.git`
 
-## Gradle
+### Gradle
  > `gradle clean build`
 
-## Docker-compose (MySql - Keycloak)
+### Docker-compose (MySql - Keycloak)
 Go to *\src\main\resources
 
 Execute: 
  > `docker-compose up`
  > `docker ps -a` (Validate status up)
 
-## Keycloak Configuration
+### Keycloak Configuration
  > `http://localhost:8084`
 
 Console Administration 
@@ -37,7 +37,7 @@ Go to Users -> Add user
  	- **Temporary**: Off
  	-> *Set Password*
  	
-## Get token (Postman*)
+### Get token (Postman*)
 
 **HEADER**:       `Authorization: Bearer Token`
 
@@ -46,23 +46,23 @@ Go to Users -> Add user
 **HEADER**:       `Content-Type:application/x-www-form-urlencoded`  
 **PARAMETROS**:   `username=gabriel&password=Password01&grant_type=password&client_id=zoo`   
 
-## ENDPOINTS
+### ENDPOINTS
 
-### **GET**: `http://localhost:8081/api/v1/animals`
-### **POST**: `http://localhost:8081/api/v1/animals`
+**GET**: `http://localhost:8081/api/v1/animals`
+**POST**: `http://localhost:8081/api/v1/animals`
      {
 	    "name":"Lion",
 	    "age": 3,
 	    "dateBorn": "2019-03-20",
 	    "weight": 3.4
 	}
-### **PUT**: `http://localhost:8081/api/v1/animals`
+**PUT**: `http://localhost:8081/api/v1/animals`
  	{
 		"id": 1,
 		"name": "Tiger"
 	}
-### **DELETE**: `http://localhost:8081/api/v1/animals/{id}`
-### **PATCH**: `http://localhost:8081/api/v1/animals/{id}`
+**DELETE**: `http://localhost:8081/api/v1/animals/{id}`
+**PATCH**: `http://localhost:8081/api/v1/animals/{id}`
 	{
 	   "id": 1,
 	   "myMap": {
@@ -71,5 +71,5 @@ Go to Users -> Add user
 	     		}
 	}
 
-## OPENAPI
+### OPENAPI
  > `http://localhost:8081/swagger-ui-custom.html`
