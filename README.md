@@ -1,6 +1,6 @@
 *This project was designed in Java 8 with Springboot. It has a hexagonal architecture and uses MySql as its database.*
 
-# Project
+## Project
  > `https://github.com/gnolivos/zoo`
 
 # Clone
