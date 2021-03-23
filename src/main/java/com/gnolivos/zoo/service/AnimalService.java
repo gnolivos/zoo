@@ -45,8 +45,7 @@ public class AnimalService implements IAnimalService{
 	 */
 	@Override
 	public Optional<Animal> findAnimalById(Long id) throws ConversionFailedException {
-		Optional<Animal> account = this.animalRepository.findById(id);
-        return account;
+		return this.animalRepository.findById(id);
 	}
 
 	/*

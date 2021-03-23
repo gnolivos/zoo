@@ -137,9 +137,9 @@ public class AnimalController {
             @ApiResponse(responseCode = "404", description = "Method not found",
                     content = @Content) })
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
     	this.animalService.delete(id);
-    	ResponseEntity.ok();
+    	return ResponseEntity.noContent().build();
     }
     
     /**
@@ -160,7 +160,7 @@ public class AnimalController {
       @RequestBody AnimalNameOnly updateNameOnly, @PathVariable("id") Long id) {
     	Optional<Animal> animalOptional = animalService.findAnimalById(id);
         if (!animalOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
         Animal animal = animalOptional.get();
         if(updateNameOnly.getName() != null) {
