@@ -3,6 +3,7 @@ package com.gnolivos.zoo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,32 +39,32 @@ public class AnimalRepositoryTest {
     private IAnimalRepository animalRepository;
 
     @Test
-    public void whenFindById_thenReturnArea() {
+    public void findAnimalByIdTest() {
         // given
-        Animal animal = new Animal();
-        animal.setName("Loro");
+        Animal bird = new Animal();
+        bird.setName("bird");
 
-        this.entityManager.persist(animal);
+        this.entityManager.persist(bird);
         this.entityManager.flush();
 
         // when
-        Optional<Animal> found = this.animalRepository.findById(animal.getId());
+        Optional<Animal> found = this.animalRepository.findById(bird.getId());
 
         // then
-        assertThat(animal.getName()).isEqualTo(found.get().getName());
+        assertThat(bird.getName()).isEqualTo(found.get().getName());
         log.info("{}", found.get().toString());
     }
     
     @Test
-    public void whenFindAll_thenReturnArea() {
+    public void findAllAnimalsTest() {
         // given
-        Animal animal1 = new Animal();
-        animal1.setName("Loro");
-        Animal animal2 = new Animal();
-        animal2.setName("perro");
+        Animal bird = new Animal();
+        bird.setName("bird");
+        Animal monkey = new Animal();
+        monkey.setName("monkey");
 
-        this.entityManager.persist(animal1);
-        this.entityManager.persist(animal2);
+        this.entityManager.persist(bird);
+        this.entityManager.persist(monkey);
         this.entityManager.flush();
 
         // when
@@ -78,24 +79,44 @@ public class AnimalRepositoryTest {
     }
     
     @Test
-    public void whenDelete_thenReturnArea() {
+    public void createAnimalTest() {
+    	
     	// given
-        Animal animal = new Animal();
-        animal.setName("Loro");
+    	Animal bird = new Animal();
+        bird.setAge(2);
+        bird.setDateBorn(LocalDate.now());
+        bird.setName("bird");
+        bird.setWeight(5L);
+        
+        this.entityManager.persist(bird);
+        this.entityManager.flush();
+        // when
+        Optional<Animal> found = this.animalRepository.findById(bird.getId());
+        
+        // then
+        this.animalRepository.save(found.get());
+        Optional<Animal> foundNew = this.animalRepository.findById(bird.getId());
+        log.info("{}", foundNew.get().toString());
+    }
+    
+    @Test
+    public void deleteAnimalTest() {
+    	// given
+        Animal bird = new Animal();
+        bird.setName("bird");
 
-        this.entityManager.persist(animal);
+        this.entityManager.persist(bird);
         this.entityManager.flush();
 
         // when
-        Optional<Animal> found = this.animalRepository.findById(animal.getId());
+        Optional<Animal> found = this.animalRepository.findById(bird.getId());
 
         // then
-        assertThat(animal.getName()).isEqualTo(found.get().getName());
+        assertThat(bird.getName()).isEqualTo(found.get().getName());
         log.info("{}", found.get().toString());
         
         this.animalRepository.delete(found.get());
-        Optional<Animal> foundDelete = this.animalRepository.findById(animal.getId());
-        
-        assertEquals(foundDelete.isPresent(), false);
+        Optional<Animal> foundDelete = this.animalRepository.findById(bird.getId());
+        log.info("Empty {}", !foundDelete.isPresent());
     }
 }

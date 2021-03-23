@@ -5,6 +5,9 @@ This project was designed in Java 8 with Springboot. It has a hexagonal architec
 
 ### Gradle
  > `gradle clean build`
+ 
+### Add IP addresses to host file (C:\Windows\System32\drivers\etc\hosts)
+> `127.0.0.1 keycloak`
 
 ### Docker-compose (MySql - Keycloak)
 Go to *\src\main\resources
