@@ -10,13 +10,10 @@ This project was designed in Java 8 with Springboot. It has a hexagonal architec
 > `Add IP address: 127.0.0.1 keycloak`
 
 ### Docker-compose (MySql - Keycloak)
-> `Go to *zoo\src\main\resources `
-> `Execute docker-compose up`
+> `Go to *zoo\src\main\resources, execute: docker-compose up`
 
 ### Keycloak Configuration
- > `Go to http://keycloak:8080/`
- > `Select Console Administration`
- > `Select Console Administration`
+ > `Go to http://keycloak:8080/ and select: Console Administration`
  > `Username: admin & Password: admin`
 
 Go to Master -> Add realm
