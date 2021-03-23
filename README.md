@@ -1,49 +1,71 @@
-#Create keycloak image
-docker run -d --name keycloak -p 8084:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin jboss/keycloak
-#Show keycloak log
-docker logs -f keycloak
-#Show coniners runnig
-docker ps
-#Stop specify container
-docker stop keycloak
-#Remove specify container
-docker rm keycloak
+This project was designed in Java 8 with Springboot. 
+Gradle 6.3 and MySql are used as database.
+Keycloak (Oauth) like authentication and authorization
+Swagger to specify the list of resources available in the REST API
 
-#Keycloak
-http://localhost:8084
-#Get token
-http://localhost:8084/auth/realms/gncorp/protocol/openid-connect/token
+### Clone
+ > `Create a folder, open a terminal and execute: git clone https://github.com/gnolivos/zoo.git`
 
-http://localhost:8081/api/v1/accounts/anonymous
+### Gradle
+ > `Open a terminal in new folder (zoo) and execute: gradle clean build`
+ 
+### Host file (C:\Windows\System32\drivers\etc\hosts)
+> `Add IP address: 127.0.0.1 keycloak`
 
-#ENDPOINTS
-http://localhost:8081/actuator
+### Docker-compose (MySql - Keycloak)
+> `Go to *zoo\src\main\resources, execute: docker-compose up`
 
-http://localhost:8081/actuator/health
+### Keycloak Configuration
+ > `Go to http://keycloak:8080/ and select: Console Administration`
+ > `Username: admin & Password: admin`
 
-GET: http://localhost:8081/api/v1/accounts
+Go to Master -> Add realm
+ - **Name**: gncorp -> *Create*
 
-POST: http://localhost:8081/api/v1/accounts
+Go to Clients -> Create
+ - **Client id**: zoo -> *Save*
+	- Go to Valid Redirect URIs and put * 
+	- Go to Web Origins and put * 
+	-> Create
+	
+Go to Users -> Add user
+ - **Username**: gabriel or any name -> *Save*
+ - Go to Credentials and put 
+ 	- **Password**: Password01 or any password
+ 	- **Temporary**: Off
+ 	-> *Set Password*
+ 	
+### Get token (Postman*)
 
-{
-"name":"Juan"
-}
+**METOD**:       `POST`   
+**URL**:          `/auth/realms/gncorp/protocol/openid-connect/token`   
+**HEADER**:       `Content-Type:application/x-www-form-urlencoded`  
+**PARAMETERS**:   `username=gabriel&password=Password01&grant_type=password&client_id=zoo`
 
-PUT: http://localhost:8081/api/v1/accounts
+Get the new Token, copy and paste in each endpoint.   
 
-{
-"id": 2,
-"name": "hola-update"
-}
+### ENDPOINTS
 
-DELETE: http://localhost:8081/api/v1/accounts/1
+All endpoints: **HEADER**: `Authorization: Bearer Token` and put the Token.
 
-#OPENAPI
-#definicion de api en formaton json o yml
-http://localhost:8081/v3/api-docs/
-http://localhost:8081/v3/api-docs.yaml
+### GET: 	`http://localhost:9070/api/v1/animals`
+### POST: 	`http://localhost:9070/api/v1/animals`
+     {
+	    "name":"Lion",
+	    "age": 3,
+	    "dateBorn": "2019-03-20",
+	    "weight": 3.4
+	  }
+### PUT: 	`http://localhost:9070/api/v1/animals`
+ 	 {
+		"id": 1,
+		"name": "Tiger"
+	 }
+### DELETE: 	`http://localhost:9070/api/v1/animals/{id}`
+### PATCH: 	`http://localhost:9070/api/v1/animals/{id}`
+	{
+	   "name": "Monkey"
+	}
 
-#endpoint
-http://localhost:8081/swagger-ui-custom.html
-
-Ref: https://www.baeldung.com/spring-rest-openapi-documentation
+### SWAGGER
+ > `Go to http://localhost:9070/swagger-ui-custom.html`

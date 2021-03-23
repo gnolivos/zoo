@@ -45,8 +45,7 @@ public class AnimalService implements IAnimalService{
 	 */
 	@Override
 	public Optional<Animal> findAnimalById(Long id) throws ConversionFailedException {
-		Optional<Animal> account = this.animalRepository.findById(id);
-        return account;
+		return this.animalRepository.findById(id);
 	}
 
 	/*
@@ -54,8 +53,12 @@ public class AnimalService implements IAnimalService{
 	 * @see com.gnolivos.zoo.service.IAnimalService#save(com.gnolivos.zoo.entity.Animal)
 	 */
 	@Override
-	public Animal save(Animal animal) throws AnimalNotFoundException {
-		return this.animalRepository.save(animal);
+	public Animal save(Animal animal) throws AnimalNotFoundException{
+		try {
+			return this.animalRepository.save(animal);
+		} catch (Exception e) {
+			throw new AnimalNotFoundException();
+		}
 	}
 
 	/*

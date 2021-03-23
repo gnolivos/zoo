@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -105,7 +106,7 @@ public class AnimalController {
                     content = @Content) })
     @PostMapping
     public ResponseEntity<Animal> create(@Valid @RequestBody Animal request) {
-        return ResponseEntity.ok(this.animalService.save(request));
+    	return new ResponseEntity<>(this.animalService.save(request), HttpStatus.CREATED);        
     }
 
     /**
@@ -137,9 +138,9 @@ public class AnimalController {
             @ApiResponse(responseCode = "404", description = "Method not found",
                     content = @Content) })
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
     	this.animalService.delete(id);
-    	ResponseEntity.ok();
+    	return ResponseEntity.noContent().build();
     }
     
     /**
@@ -157,14 +158,14 @@ public class AnimalController {
                     content = @Content) })
     @PatchMapping("/{id}")
     public ResponseEntity<Animal> updateAnimal(@Valid
-      @RequestBody AnimalNameOnly partialUpdate, @PathVariable("id") Long id) {
+      @RequestBody AnimalNameOnly updateNameOnly, @PathVariable("id") Long id) {
     	Optional<Animal> animalOptional = animalService.findAnimalById(id);
         if (!animalOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
         Animal animal = animalOptional.get();
-        if(partialUpdate.getName() != null) {
-        	animal.setName(partialUpdate.getName());
+        if(updateNameOnly.getName() != null) {
+        	animal.setName(updateNameOnly.getName());
         }
         return ResponseEntity.ok(this.animalService.save(animal));
     }

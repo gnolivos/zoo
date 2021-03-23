@@ -3,49 +3,62 @@
  */
 package com.gnolivos.zoo;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.gnolivos.zoo.controller.AnimalController;
+import com.gnolivos.zoo.entity.Animal;
+import com.gnolivos.zoo.service.IAnimalService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author gnolivos
  *
  */
-//@RunWith(MockitoJUnitRunner.class)
-//@WebMvcTest(value = AnimalController.class)
-//@WithMockUser
-@SpringBootTest
-@ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
+@Slf4j
+@RunWith(MockitoJUnitRunner.class)
 public class AnimalControllerTest {
 	
-	@Autowired
-	protected MockMvc mockMvc;
+	@InjectMocks
+	AnimalController animalController;
+
+	@Mock
+	IAnimalService animalService;
 
 	@Test
-	public void testFindAllAnimalsTest() {
+	public void findAllAnimalsTest() {
+
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 	
-//		List<Animal> animals = new ArrayList<>();
-//		Animal animal = new Animal();
-//		animal.setId(1l);
-//		animals.add(animal);
-//		Mockito.when(this.animalService.findAllAnimals()).thenReturn(animals);
-		
-//		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-//				"/api/v1/animals").accept(MediaType.APPLICATION_JSON);
-		
-//		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		List<Animal> animals = new ArrayList<>();
+		Animal bird = new Animal();
+		bird.setId(1l);
+		animals.add(bird);
+		Animal tiger = new Animal();
+		tiger.setId(2l);
+		animals.add(tiger);
+		when(animalService.findAllAnimals()).thenReturn(animals);
 
-//		System.out.println(result.getResponse());
-		
-		Assertions.assertThat(1).isEqualTo(1);
-		
-		
+		ResponseEntity<List<Animal>> responseEntity = animalController.getAnimals();
+
+		assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
+		assertThat(responseEntity.getBody()).isNotEmpty();
+		log.info("{}", responseEntity.getBody().size());
 	}
-
+	
 }

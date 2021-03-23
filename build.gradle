@@ -2,14 +2,40 @@ plugins {
 	id 'org.springframework.boot' version '2.4.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'com.google.cloud.tools.jib' version '2.7.1'
 }
 
 group = 'com.gnolivos'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
 	mavenCentral()
+}
+
+springBoot {
+	buildInfo()
+}
+
+jib {
+	from {
+		image = 'gcr.io/distroless/java:8'
+	}
+	to {
+		image = 'gncorp/zoo'
+		tags = ['latest', project.version]
+	}
+	container {
+		mainClass = 'com.gnolivos.zoo.ZooApplication'
+		ports = ['8081']
+		format = 'OCI'
+	}
 }
 
 dependencies {
@@ -32,14 +58,18 @@ dependencies {
 	//Hot reload
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation "mysql:mysql-connector-java:6.0.6"
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	
 	//Test
-    testImplementation group: 'junit', name: 'junit'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation group: 'junit', name: 'junit'
     testImplementation group: 'org.mockito', name: 'mockito-core'
+	testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
+	testImplementation group: 'com.h2database', name: 'h2'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 test {
