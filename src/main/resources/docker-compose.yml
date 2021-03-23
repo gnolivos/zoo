@@ -1,5 +1,15 @@
-version: '3.3'
+version: '3.7'
 services:
+  zoo:
+    image: gncorp/zoo:1.1.0-SNAPSHOT
+    ports:
+      - 9070:8081
+    depends_on:
+      - db
+      - keycloak
+    networks:
+      - zoonetwork
+      
   db:
     image: mysql:5.7
     restart: always
@@ -14,6 +24,8 @@ services:
       - '3306'
     volumes:
       - my-db:/var/lib/mysql
+    networks:
+      - zoonetwork
       
   keycloak:
     image: jboss/keycloak
@@ -21,7 +33,13 @@ services:
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
     ports:
-      - 8084:8080
+      - 8080:8080
+    networks:
+      - zoonetwork
       
 volumes:
   my-db:
+  
+networks:
+  zoonetwork:
+    driver: bridge

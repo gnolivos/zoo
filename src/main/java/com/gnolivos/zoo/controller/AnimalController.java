@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -105,7 +106,7 @@ public class AnimalController {
                     content = @Content) })
     @PostMapping
     public ResponseEntity<Animal> create(@Valid @RequestBody Animal request) {
-        return ResponseEntity.ok(this.animalService.save(request));
+    	return new ResponseEntity<>(this.animalService.save(request), HttpStatus.CREATED);        
     }
 
     /**

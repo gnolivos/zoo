@@ -73,3 +73,9 @@ Go to Users -> Add user
 
 ### OPENAPI
  > `http://localhost:8081/swagger-ui-custom.html`
+
+ 
+# Docker
+gradle clean build jib
+
+agregar en el host la ip de keycloak

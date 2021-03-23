@@ -1,15 +1,21 @@
 package com.gnolivos.zoo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.info.BuildProperties;
+import org.springframework.context.annotation.Bean;
+
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(scanBasePackages = "com.gnolivos.zoo")
 public class ZooApplication {
+
+	@Autowired
+	private BuildProperties buildProperties;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ZooApplication.class, args);
@@ -20,7 +26,7 @@ public class ZooApplication {
 		return new OpenAPI()
 				.info(new Info()
 						.title("Microservices application API")
-						.version("1.0.0")
+						.version(buildProperties.getVersion())
 						.description("Zoo Api")
 						.contact(new Contact()
 								.name("Gabriel Nolivos")
