@@ -48,8 +48,8 @@ Go to Users -> Add user
 
 ### ENDPOINTS
 
-**GET**: 	`http://localhost:8081/api/v1/animals`
-**POST**: 	`http://localhost:8081/api/v1/animals`
+### **GET**: 	`http://localhost:8081/api/v1/animals`
+### **POST**: 	`http://localhost:8081/api/v1/animals`
      {
 	    "name":"Lion",
 	    "age": 3,
