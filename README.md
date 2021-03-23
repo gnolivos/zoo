@@ -48,21 +48,21 @@ Go to Users -> Add user
 
 ### ENDPOINTS
 
-**GET**: `http://localhost:8081/api/v1/animals`
-**POST**: `http://localhost:8081/api/v1/animals`
+**GET**: 	`http://localhost:8081/api/v1/animals`
+**POST**: 	`http://localhost:8081/api/v1/animals`
      {
 	    "name":"Lion",
 	    "age": 3,
 	    "dateBorn": "2019-03-20",
 	    "weight": 3.4
 	}
-**PUT**: `http://localhost:8081/api/v1/animals`
+**PUT**: 	`http://localhost:8081/api/v1/animals`
  	{
 		"id": 1,
 		"name": "Tiger"
 	}
-**DELETE**: `http://localhost:8081/api/v1/animals/{id}`
-**PATCH**: `http://localhost:8081/api/v1/animals/{id}`
+**DELETE**: 	`http://localhost:8081/api/v1/animals/{id}`
+**PATCH**: 	`http://localhost:8081/api/v1/animals/{id}`
 	{
 	   "id": 1,
 	   "myMap": {
