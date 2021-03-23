@@ -25,7 +25,7 @@ public class ZooApplication {
 						.contact(new Contact()
 								.name("Gabriel Nolivos")
 								.email("gabrieloal8@hotmail.com")
-								.url("https://www.gnolivos.com"))
+								.url("https://github.com/gnolivos"))
 						.termsOfService("http://swagger.io/terms/")
 						.license(new License().name("Apache 2.0").url("http://springdoc.org")));
 	}

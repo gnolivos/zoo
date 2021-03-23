@@ -157,14 +157,14 @@ public class AnimalController {
                     content = @Content) })
     @PatchMapping("/{id}")
     public ResponseEntity<Animal> updateAnimal(@Valid
-      @RequestBody AnimalNameOnly partialUpdate, @PathVariable("id") Long id) {
+      @RequestBody AnimalNameOnly updateNameOnly, @PathVariable("id") Long id) {
     	Optional<Animal> animalOptional = animalService.findAnimalById(id);
         if (!animalOptional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
         Animal animal = animalOptional.get();
-        if(partialUpdate.getName() != null) {
-        	animal.setName(partialUpdate.getName());
+        if(updateNameOnly.getName() != null) {
+        	animal.setName(updateNameOnly.getName());
         }
         return ResponseEntity.ok(this.animalService.save(animal));
     }
