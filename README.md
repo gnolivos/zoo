@@ -1,28 +1,23 @@
 This project was designed in Java 8 with Springboot. It has a hexagonal architecture and uses MySql as its database.
 
 ### Clone
- > `git clone https://github.com/gnolivos/zoo.git`
+ > `Create a folder and execute: git clone https://github.com/gnolivos/zoo.git`
 
 ### Gradle
- > `gradle clean build`
+ > `Open a terminal in that folder and execute: gradle clean build`
  
-### Add IP addresses to host file (C:\Windows\System32\drivers\etc\hosts)
-> `127.0.0.1 keycloak`
+### Host file (C:\Windows\System32\drivers\etc\hosts)
+> `Add IP address: 127.0.0.1 keycloak`
 
 ### Docker-compose (MySql - Keycloak)
-Go to *\src\main\resources
-
-Execute: 
- > `docker-compose up`
- > `docker ps -a` (Validate status up)
+> `Go to *zoo\src\main\resources `
+> `Execute docker-compose up`
 
 ### Keycloak Configuration
- > `http://keycloak:8080/`
-
-**Console Administration** 
-
-> Username: admin
-> Password: admin
+ > `Go to http://keycloak:8080/`
+ > `Select Console Administration`
+ > `Select Console Administration`
+ > `Username: admin & Password: admin`
 
 Go to Master -> Add realm
  - **Name**: gncorp -> *Create*
@@ -51,31 +46,26 @@ Go to Users -> Add user
 
 ### ENDPOINTS
 
-### GET: 	`http://localhost:8081/api/v1/animals`
-### POST: 	`http://localhost:8081/api/v1/animals`
+All endpoints with **HEADER**: `Authorization: Bearer Token`
+
+### GET: 	`http://localhost:9070/api/v1/animals`
+### POST: 	`http://localhost:9070/api/v1/animals`
      {
 	    "name":"Lion",
 	    "age": 3,
 	    "dateBorn": "2019-03-20",
 	    "weight": 3.4
 	  }
-### PUT: 	`http://localhost:8081/api/v1/animals`
+### PUT: 	`http://localhost:9070/api/v1/animals`
  	 {
 		"id": 1,
 		"name": "Tiger"
 	 }
-### DELETE: 	`http://localhost:8081/api/v1/animals/{id}`
-### PATCH: 	`http://localhost:8081/api/v1/animals/{id}`
+### DELETE: 	`http://localhost:9070/api/v1/animals/{id}`
+### PATCH: 	`http://localhost:9070/api/v1/animals/{id}`
 	{
 	   "name": "Monkey"
 	}
 
-### OPENAPI
- > `http://localhost:8081/swagger-ui-custom.html`
-
- 
-### Docker jib
-> `gradle clean build jib`
-
-### Add IP addresses to host file (C:\Windows\System32\drivers\etc\hosts)
-> `127.0.0.1 keycloak`
+### SWAGGER
+ > `Go to http://localhost:9070/swagger-ui-custom.html`
