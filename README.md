@@ -1,5 +1,7 @@
 This project was designed in Java 8 with Springboot. 
-Gradle 6.3 and MySql are used as the database.
+Gradle 6.3 and MySql are used as database.
+Keycloak (Oauth) like authentication and authorization
+Swagger to specify the list of resources available in the REST API
 
 ### Clone
  > `Create a folder, open a terminal and execute: git clone https://github.com/gnolivos/zoo.git`
