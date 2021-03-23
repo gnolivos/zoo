@@ -1,25 +1,23 @@
-This project was designed in Java 8 with Springboot. It has a hexagonal architecture and uses MySql as its database.
+This project was designed in Java 8 with Springboot. 
+Gradle 6.3 and MySql are used as database.
+Keycloak (Oauth) like authentication and authorization
+Swagger to specify the list of resources available in the REST API
 
 ### Clone
- > `git clone https://github.com/gnolivos/zoo.git`
+ > `Create a folder, open a terminal and execute: git clone https://github.com/gnolivos/zoo.git`
 
 ### Gradle
- > `gradle clean build`
+ > `Open a terminal in new folder (zoo) and execute: gradle clean build`
+ 
+### Host file (C:\Windows\System32\drivers\etc\hosts)
+> `Add IP address: 127.0.0.1 keycloak`
 
 ### Docker-compose (MySql - Keycloak)
-Go to *\src\main\resources
-
-Execute: 
- > `docker-compose up`
- > `docker ps -a` (Validate status up)
+> `Go to *zoo\src\main\resources, execute: docker-compose up`
 
 ### Keycloak Configuration
- > `http://keycloak:8080/`
-
-**Console Administration** 
-
-> Username: admin
-> Password: admin
+ > `Go to http://keycloak:8080/ and select: Console Administration`
+ > `Username: admin & Password: admin`
 
 Go to Master -> Add realm
  - **Name**: gncorp -> *Create*
@@ -39,40 +37,35 @@ Go to Users -> Add user
  	
 ### Get token (Postman*)
 
-**HEADER**:       `Authorization: Bearer Token`
-
-**METODO**:       `POST`   
+**METOD**:       `POST`   
 **URL**:          `/auth/realms/gncorp/protocol/openid-connect/token`   
 **HEADER**:       `Content-Type:application/x-www-form-urlencoded`  
-**PARAMETROS**:   `username=gabriel&password=Password01&grant_type=password&client_id=zoo`   
+**PARAMETERS**:   `username=gabriel&password=Password01&grant_type=password&client_id=zoo`
+
+Get the new Token, copy and paste in each endpoint.   
 
 ### ENDPOINTS
 
-### GET: 	`http://localhost:8081/api/v1/animals`
-### POST: 	`http://localhost:8081/api/v1/animals`
+All endpoints: **HEADER**: `Authorization: Bearer Token` and put the Token.
+
+### GET: 	`http://localhost:9070/api/v1/animals`
+### POST: 	`http://localhost:9070/api/v1/animals`
      {
 	    "name":"Lion",
 	    "age": 3,
 	    "dateBorn": "2019-03-20",
 	    "weight": 3.4
 	  }
-### PUT: 	`http://localhost:8081/api/v1/animals`
+### PUT: 	`http://localhost:9070/api/v1/animals`
  	 {
 		"id": 1,
 		"name": "Tiger"
 	 }
-### DELETE: 	`http://localhost:8081/api/v1/animals/{id}`
-### PATCH: 	`http://localhost:8081/api/v1/animals/{id}`
+### DELETE: 	`http://localhost:9070/api/v1/animals/{id}`
+### PATCH: 	`http://localhost:9070/api/v1/animals/{id}`
 	{
 	   "name": "Monkey"
 	}
 
-### OPENAPI
- > `http://localhost:8081/swagger-ui-custom.html`
-
- 
-### Docker jib
-> `gradle clean build jib`
-
-### Add IP addresses to host file (C:\Windows\System32\drivers\etc\hosts)
-> `127.0.0.1 keycloak`
+### SWAGGER
+ > `Go to http://localhost:9070/swagger-ui-custom.html`

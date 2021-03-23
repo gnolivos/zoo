@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   zoo:
-    image: gncorp/zoo:1.1.0-SNAPSHOT
+    image: gncorp/zoo:1.0.0-SNAPSHOT
     ports:
       - 9070:8081
     depends_on:
