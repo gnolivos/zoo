@@ -1,10 +1,10 @@
 This project was designed in Java 8 with Springboot. It has a hexagonal architecture and uses MySql as its database.
 
 ### Clone
- > `Create a folder and execute: git clone https://github.com/gnolivos/zoo.git`
+ > `Create a folder, open a terminal and execute: git clone https://github.com/gnolivos/zoo.git`
 
 ### Gradle
- > `Open a terminal in that folder and execute: gradle clean build`
+ > `Open a terminal in new folder (zoo) and execute: gradle clean build`
  
 ### Host file (C:\Windows\System32\drivers\etc\hosts)
 > `Add IP address: 127.0.0.1 keycloak`
